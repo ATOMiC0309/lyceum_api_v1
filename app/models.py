@@ -53,6 +53,9 @@ class New(models.Model):
     def __str__(self):
         return self.news_title
 
+    class Meta:
+        ordering = ['-pk']
+
 
 class Application(models.Model):
     firstname = models.CharField(max_length=40)
@@ -74,3 +77,7 @@ class ActiveStudent(models.Model):
 
     def __str__(self):
         return self.group_name
+
+    class Meta:
+        ordering = ['-pk']
+

@@ -73,4 +73,13 @@ class ApplicationAdmin(admin.ModelAdmin):
 
 @admin.register(ActiveStudent)
 class ActiveStudentAdmin(admin.ModelAdmin):
-    list_display = ['id', 'group_name', 'group_image', 'group_title', 'group_result']
+    list_display = ['id', 'group_name', 'get_image', 'group_title', 'group_result']
+
+    def get_image(self, obj):
+        if obj.group_image:
+            res = mark_safe(f"<img style='width: 60px' src='{obj.group_image.url}'/>")
+        else:
+            res = "Rasm topilmadi"
+        return res
+
+    get_image.short_description = "Rasmi"

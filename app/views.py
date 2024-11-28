@@ -1,8 +1,10 @@
+from rest_framework.generics import RetrieveAPIView
 from rest_framework.viewsets import ModelViewSet
 from .serializers import (TeacherSerializer, DirectionSerializer, EducationDirectSerializer,
                           ActiveStudentSerializer, LeaderSerializer, NewSerializers, V2DirectionSerializer,
                           ApplicationSerializer)
 from .models import Teacher, ActiveStudent, Leader, Direction, EducationDirect, Application, New
+from rest_framework.pagination import PageNumberPagination
 
 
 class TeacherView(ModelViewSet):
@@ -20,9 +22,12 @@ class EducationDirectView(ModelViewSet):
     serializer_class = EducationDirectSerializer
 
 
-class ActiveStudentView(ModelViewSet):
+class ActiveStudentView(RetrieveAPIView):
     queryset = ActiveStudent.objects.all()
     serializer_class = ActiveStudentSerializer
+
+    def get_object(self):
+        return self.queryset.first()
 
 
 class LeaderView(ModelViewSet):
@@ -33,6 +38,7 @@ class LeaderView(ModelViewSet):
 class NewView(ModelViewSet):
     queryset = New.objects.all()
     serializer_class = NewSerializers
+    pagination_class = PageNumberPagination
 
 
 class ApplicationView(ModelViewSet):
