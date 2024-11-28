@@ -2,6 +2,7 @@ Step-1:
   clone git rep
 Step-2:
   open project directory
+  pip install -r requirements.txt
 Step-3:
   py manage.py makemigrations
   py manage.py migrate
